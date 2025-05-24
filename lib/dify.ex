@@ -6,6 +6,10 @@ defmodule Dify do
   @api "app-NlGpxKmJ8NFhWRWSDbWk8IRW"
   @host "10.1.1.3:8001"
 
+  def spawn_link_llm(str, pid) do
+    spawn_link(fn -> llm(str, pid) end)
+  end
+
   # Dify.llm("車は速い")
   # Dify.llm("車は速い", self())
   def llm(str, pid) do
@@ -36,6 +40,7 @@ defmodule Dify do
       |> Map.get("data")
       |> Map.get("text")
 
-    Process.send(pid, {:message, text}, [:noconnect])
+    # def handle_info({:text, text}, socket) do
+    Process.send(pid, {:text, text}, [:noconnect])
   end
 end
