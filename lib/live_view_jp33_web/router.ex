@@ -17,6 +17,7 @@ defmodule LiveViewJp33Web.Router do
   scope "/", LiveViewJp33Web do
     pipe_through :browser
 
+    live "/llm", Llm.Index, :index
     get "/", PageController, :home
   end
 
