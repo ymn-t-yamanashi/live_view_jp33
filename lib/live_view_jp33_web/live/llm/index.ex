@@ -11,8 +11,31 @@ defmodule LiveViewJp33Web.Llm.Index do
   end
 
   @impl true
+  def handle_info({:text, text}, socket) do
+    llm_text = "#{socket.assigns.llm_text}#{text}"
+    socket =
+      socket
+      |> assign(llm_text: llm_text)
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_event("llm", _value, socket) do
 
+    Dify.spawn_link_llm(socket.assigns.text, self())
+
+    socket =
+      socket
+      |> assign(text: "")
+      |> assign(llm_text: socket.assigns.text)
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("change_text", %{"text" => text}, socket) do
+    socket =
+      socket
+      |> assign(text: text)
     {:noreply, socket}
   end
 end
