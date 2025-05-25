@@ -18,6 +18,11 @@ defmodule Dify do
       Authorization: "Bearer #{@api}"
     ]
 
+    str =
+      String.replace(str, "\"", "\\\"")
+
+    str = Regex.replace(~r/\n/, str, " ")
+
     json = """
     {
       "inputs": {"in": "#{str}"},
