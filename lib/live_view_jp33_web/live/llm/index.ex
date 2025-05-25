@@ -7,6 +7,7 @@ defmodule LiveViewJp33Web.Llm.Index do
       socket
       |> assign(text: "Elixirについて教えて")
       |> assign(llm_text: ">")
+      |> assign(is_run: false)
 
     {:ok, socket}
   end
@@ -23,6 +24,15 @@ defmodule LiveViewJp33Web.Llm.Index do
   end
 
   @impl true
+  def handle_info(:llm_end, socket) do
+    socket =
+      socket
+      |> assign(is_run: false)
+
+    {:noreply, socket}
+  end
+
+  @impl true
   def handle_event("llm", _value, socket) do
     Dify.spawn_link_llm(socket.assigns.text, self())
 
@@ -30,6 +40,7 @@ defmodule LiveViewJp33Web.Llm.Index do
       socket
       |> assign(text: "")
       |> assign(llm_text: socket.assigns.text <> "\n\n")
+      |> assign(is_run: true)
 
     {:noreply, socket}
   end

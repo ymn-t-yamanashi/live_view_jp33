@@ -36,6 +36,8 @@ defmodule Dify do
     |> then(fn x -> x.body end)
     |> Stream.map(fn x -> text(x, pid) end)
     |> Stream.run()
+
+    Process.send(pid, :llm_end, [:noconnect])
   end
 
   defp text(x, pid) do
