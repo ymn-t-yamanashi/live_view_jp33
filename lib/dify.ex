@@ -36,11 +36,18 @@ defmodule Dify do
   defp text(x, pid) do
     text =
       Regex.replace(~r/^data: /, x, "")
-      |> Jason.decode!()
-      |> Map.get("data")
-      |> Map.get("text")
+      |> Jason.decode()
+      |> text()
 
     # def handle_info({:text, text}, socket) do
     Process.send(pid, {:text, text}, [:noconnect])
   end
+
+  defp text({:ok, text}) do
+    text
+    |> Map.get("data")
+    |> Map.get("text")
+  end
+
+  defp text(_), do: ""
 end
