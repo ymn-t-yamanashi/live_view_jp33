@@ -4,6 +4,7 @@ defmodule Dify do
   """
 
   @api "app-NlGpxKmJ8NFhWRWSDbWk8IRW"
+  @api2 "app-BVcVI7Nb0BvEYXKumD7Tn7I1"
   @host "10.1.1.3:8001"
 
   def spawn_link_llm(str, pid) do
@@ -15,7 +16,7 @@ defmodule Dify do
   def llm(str, pid) do
     headers = [
       "Content-Type": "application/json",
-      Authorization: "Bearer #{@api}"
+      Authorization: "Bearer #{@api2}"
     ]
 
     str =
