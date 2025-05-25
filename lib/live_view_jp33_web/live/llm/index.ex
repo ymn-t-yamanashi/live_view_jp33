@@ -6,7 +6,7 @@ defmodule LiveViewJp33Web.Llm.Index do
     socket =
       socket
       |> assign(text: "Elixirについて教えて")
-      |> assign(llm_text: "😺")
+      |> assign(llm_text: ">")
 
     {:ok, socket}
   end
