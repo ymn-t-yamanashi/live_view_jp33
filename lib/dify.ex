@@ -16,7 +16,7 @@ defmodule Dify do
   def llm(str, pid) do
     headers = [
       "Content-Type": "application/json",
-      Authorization: "Bearer #{@api2}"
+      Authorization: "Bearer #{@api}"
     ]
 
     str =

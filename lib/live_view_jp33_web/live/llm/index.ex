@@ -7,7 +7,7 @@ defmodule LiveViewJp33Web.Llm.Index do
 
     socket =
       socket
-      |> assign(text: "Elixirについて教えて")
+      |> assign(text: "read_file /home/user/local/mcp/tmp/test.txtをmcpで実行して結果を表示して欲しい")
       |> assign(llm_text: ">")
       |> assign(is_run: false)
       |> assign(gpu_info: "")
